@@ -7,6 +7,7 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import Dialog from 'react-native-dialog';
 import uuid from 'react-native-uuid';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Local imports: components
 import Header from '@/components/Header';
@@ -18,14 +19,70 @@ import ButtonAdd from '@/components/ButtonAdd';
 import styles from './index.style';
 
 // Local imports: types and constants
-import { Todo, TabName, TODO_LIST } from '@/types/todo.types';
+import { Todo, TabName } from '@/types/todo.types';
 
 export default function Index() {
-  const [todoList, setTodoList] = useState(TODO_LIST);
+  const [todoList, setTodoList] = useState([]);
   const [isAddDialogDisplayed, setIsAddDialogDisplayed] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [selectedTabName, setSelectedTabName] = useState(TabName.ALL);
   const scrollViewRef = useRef<ScrollView>(null);
+
+  /**
+   * Tracks the first render of the component to skip initial side effects
+   * Set to true initially, becomes false after first render
+   */
+  const [isInitialRender, setIsInitialRender] = useState(true);
+
+  /**
+   * Prevents unnecessary updates during data loading
+   * Set to false initially, becomes true during data updates
+   */
+  const [isLoadUpdate, setIsLoadUpdate] = useState(false);
+
+  React.useEffect(() => {
+    loadTodoList();
+  }, []);
+
+  React.useEffect(() => {
+    // Skip effect during updates from loading data
+    if (isLoadUpdate) {
+      setIsLoadUpdate(false);
+      return;
+    }
+
+    // Skip first render
+    if (isInitialRender) {
+      setIsInitialRender(false);
+      return;
+    }
+
+    // Save todo list on subsequent changes
+    saveTodoList();
+  }, [todoList]);
+
+  async function loadTodoList() {
+    console.log('LOAD');
+
+    try {
+      const todoListString = await AsyncStorage.getItem('@todoList');
+      const parsedTodoList = todoListString ? JSON.parse(todoListString) : [];
+      setIsLoadUpdate(true);
+      setTodoList(parsedTodoList);
+    } catch (err) {
+      alert(err)
+    }
+  }
+
+  async function saveTodoList() {
+    console.log('SAVE');
+
+    try {
+      await AsyncStorage.setItem('@todoList', JSON.stringify(todoList));
+    } catch (err) {
+      alert(err)
+    }
+  }
 
   function getFilteredList() {
     switch (selectedTabName) {

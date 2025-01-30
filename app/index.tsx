@@ -62,7 +62,7 @@ export default function Index() {
   }, [todoList]);
 
   async function loadTodoList() {
-    console.log('LOAD');
+    // console.log('LOAD');
 
     try {
       const todoListString = await AsyncStorage.getItem('@todoList');
@@ -75,7 +75,7 @@ export default function Index() {
   }
 
   async function saveTodoList() {
-    console.log('SAVE');
+    // console.log('SAVE');
 
     try {
       await AsyncStorage.setItem('@todoList', JSON.stringify(todoList));

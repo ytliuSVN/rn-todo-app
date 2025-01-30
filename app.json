@@ -18,6 +18,8 @@
       },
       "permissions": [
         "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT",
+        "android.permission.USE_BIOMETRIC",
         "android.permission.USE_FINGERPRINT"
       ]
     },
@@ -55,6 +57,12 @@
         "projectId": "e75c0b1e-2130-413b-b3a4-6e522e4eb427"
       }
     },
-    "owner": "ytliusvn"
+    "owner": "ytliusvn",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/e75c0b1e-2130-413b-b3a4-6e522e4eb427"
+    }
   }
 }

@@ -5,6 +5,7 @@ import { Text, View } from 'react-native';
 // Third-party library imports
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useFonts, Bangers_400Regular } from '@expo-google-fonts/bangers';
+import { useTranslation } from 'react-i18next';
 
 // Local imports: constants
 import { COLORS } from '@/constants/colors';
@@ -13,6 +14,8 @@ import { COLORS } from '@/constants/colors';
 import styles from './index.style';
 
 export default function Header() {
+  const { t } = useTranslation();
+
   const [fontsLoaded] = useFonts({
     Bangers_400Regular,
   });
@@ -36,7 +39,7 @@ export default function Header() {
           list
         </Text>
       </View>
-      <Text style={styles.subtitle}>やることあるでしょ？</Text>
+      <Text style={styles.subtitle}>{ t('subtitle') }</Text>
     </>
   );
 }

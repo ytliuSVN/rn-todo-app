@@ -1,5 +1,6 @@
 import { Stack, useRouter } from 'expo-router';
 import { useEffect } from 'react';
+import '@/i18n';
 
 export default function RootLayout() {
   const router = useRouter();

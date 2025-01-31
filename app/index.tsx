@@ -8,6 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Dialog from 'react-native-dialog';
 import uuid from 'react-native-uuid';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useTranslation } from 'react-i18next';
 
 // Local imports: components
 import Header from '@/components/Header';
@@ -39,6 +40,8 @@ export default function Index() {
    * Set to false initially, becomes true during data updates
    */
   const [isLoadUpdate, setIsLoadUpdate] = useState(false);
+
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     loadTodoList();
@@ -179,8 +182,8 @@ export default function Index() {
         visible={isAddDialogDisplayed}
         onBackdropPress={() => setIsAddDialogDisplayed(false)}
       >
-        <Dialog.Title>新規タスク</Dialog.Title>
-        <Dialog.Description>タスクを入力してください</Dialog.Description>
+        <Dialog.Title>{ t('dialog.create.title') }</Dialog.Title>
+        <Dialog.Description>{ t('dialog.create.description') }</Dialog.Description>
 
         <Dialog.Input
           onChangeText={setInputValue}
@@ -188,13 +191,13 @@ export default function Index() {
         />
 
         <Dialog.Button
-          label='キャンセル'
+          label={t('dialog.actions.cancel')}
           color='grey'
           onPress={() => setIsAddDialogDisplayed(false)}
         />
         <Dialog.Button
           disabled={inputValue.length === 0}
-          label='保存'
+          label={t('dialog.actions.save')}
           onPress={addTodo}
         />
       </Dialog.Container>

@@ -99,25 +99,25 @@ export default function Index() {
   }
 
   function deleteTodo(todoToDelete: Todo) {
-    Alert.alert('タスクを削除', 'このタスクを削除してもよろしいですか？', [
+    Alert.alert(t('dialog.delete.title'), t('dialog.delete.description'), [
       {
-        text: '削除',
+        text: t('dialog.actions.delete'),
         style: 'destructive',
         onPress: () => {
           setTodoList(todoList.filter((todo) => todo.id !== todoToDelete.id));
         },
       },
-      { text: 'キャンセル', style: 'cancel' },
+      { text: t('dialog.actions.cancel'), style: 'cancel' },
     ]);
   }
 
   function updateTodoTitle(todoToUpdate: Todo) {
     Alert.prompt(
-      'タイトルを編集',
-      '新しいタイトルを入力してください',
+      t('dialog.update.title'),
+      t('dialog.update.description'),
       [
         {
-          text: '保存',
+          text: t('dialog.actions.save'),
           onPress: (newTitle?: string) => {
             if (newTitle) {
               setTodoList(
@@ -131,7 +131,7 @@ export default function Index() {
           },
         },
         {
-          text: 'キャンセル',
+          text: t('dialog.actions.cancel'),
           style: 'cancel',
         },
       ],

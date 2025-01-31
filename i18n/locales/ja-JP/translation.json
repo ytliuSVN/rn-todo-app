@@ -1,6 +1,11 @@
 {
   "subtitle": "やることあるでしょ？",
   "createNew": "新規作成",
+  "tabs": {
+    "all": "すべて",
+    "inProgress": "進行中",
+    "done": "完了"
+  },
   "dialog": {
     "create": {
       "title": "新規タスク",

@@ -1,6 +1,11 @@
 {
   "subtitle": "Got things to do?",
   "createNew": "Create New",
+  "tabs": {
+    "all": "All",
+    "inProgress": "In Progress",
+    "done": "Done"
+  },
   "dialog": {
     "create": {
       "title": "New Task",

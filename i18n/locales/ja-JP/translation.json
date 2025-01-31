@@ -1,0 +1,28 @@
+{
+  "subtitle": "やることあるでしょ？",
+  "createNew": "新規作成",
+  "tabs": {
+    "all": "すべて",
+    "inProgress": "進行中",
+    "done": "完了"
+  },
+  "dialog": {
+    "create": {
+      "title": "新規タスク",
+      "description": "タスクを入力してください"
+    },
+    "delete": {
+      "title": "タスクを削除",
+      "description": "このタスクを削除してもよろしいですか？"
+    },
+    "update": {
+      "title": "タイトルを編集",
+      "description": "新しいタイトルを入力してください"
+    },
+    "actions": {
+      "cancel": "キャンセル",
+      "save": "保存",
+      "delete": "削除"
+    }
+  }
+}

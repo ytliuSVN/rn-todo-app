@@ -3,8 +3,11 @@ import styles from './index.style';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { COLORS } from '@/constants/colors';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useTranslation } from 'react-i18next';
 
 export default function ButtonAdd({ onPress }: { onPress: () => void }) {
+  const { t } = useTranslation();
+
   return (
     <TouchableOpacity onPress={onPress} style={styles.btnContainer}>
       <LinearGradient
@@ -14,7 +17,7 @@ export default function ButtonAdd({ onPress }: { onPress: () => void }) {
         style={styles.btn}
       >
         <FontAwesome name='trash' size={18} color={'white'} />
-        <Text style={styles.txt}>新規作成</Text>
+        <Text style={styles.txt}>{ t('createNew') }</Text>
       </LinearGradient>
     </TouchableOpacity>
   );

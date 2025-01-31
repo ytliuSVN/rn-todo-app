@@ -8,6 +8,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import Dialog from 'react-native-dialog';
 import uuid from 'react-native-uuid';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useTranslation } from 'react-i18next';
 
 // Local imports: components
 import Header from '@/components/Header';
@@ -39,6 +40,8 @@ export default function Index() {
    * Set to false initially, becomes true during data updates
    */
   const [isLoadUpdate, setIsLoadUpdate] = useState(false);
+
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     loadTodoList();
@@ -96,25 +99,25 @@ export default function Index() {
   }
 
   function deleteTodo(todoToDelete: Todo) {
-    Alert.alert('タスクを削除', 'このタスクを削除してもよろしいですか？', [
+    Alert.alert(t('dialog.delete.title'), t('dialog.delete.description'), [
       {
-        text: '削除',
+        text: t('dialog.actions.delete'),
         style: 'destructive',
         onPress: () => {
           setTodoList(todoList.filter((todo) => todo.id !== todoToDelete.id));
         },
       },
-      { text: 'キャンセル', style: 'cancel' },
+      { text: t('dialog.actions.cancel'), style: 'cancel' },
     ]);
   }
 
   function updateTodoTitle(todoToUpdate: Todo) {
     Alert.prompt(
-      'タイトルを編集',
-      '新しいタイトルを入力してください',
+      t('dialog.update.title'),
+      t('dialog.update.description'),
       [
         {
-          text: '保存',
+          text: t('dialog.actions.save'),
           onPress: (newTitle?: string) => {
             if (newTitle) {
               setTodoList(
@@ -128,7 +131,7 @@ export default function Index() {
           },
         },
         {
-          text: 'キャンセル',
+          text: t('dialog.actions.cancel'),
           style: 'cancel',
         },
       ],
@@ -179,8 +182,8 @@ export default function Index() {
         visible={isAddDialogDisplayed}
         onBackdropPress={() => setIsAddDialogDisplayed(false)}
       >
-        <Dialog.Title>新規タスク</Dialog.Title>
-        <Dialog.Description>タスクを入力してください</Dialog.Description>
+        <Dialog.Title>{ t('dialog.create.title') }</Dialog.Title>
+        <Dialog.Description>{ t('dialog.create.description') }</Dialog.Description>
 
         <Dialog.Input
           onChangeText={setInputValue}
@@ -188,13 +191,13 @@ export default function Index() {
         />
 
         <Dialog.Button
-          label='キャンセル'
+          label={t('dialog.actions.cancel')}
           color='grey'
           onPress={() => setIsAddDialogDisplayed(false)}
         />
         <Dialog.Button
           disabled={inputValue.length === 0}
-          label='保存'
+          label={t('dialog.actions.save')}
           onPress={addTodo}
         />
       </Dialog.Container>

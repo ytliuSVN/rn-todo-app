@@ -1,12 +1,7 @@
 import { Text, TouchableOpacity, View } from 'react-native';
 import styles from './index.style';
 import { TabName } from '@/types/todo.types';
-
-const TAB_TEXT = {
-  [TabName.ALL]: 'すべて',
-  [TabName.IN_PROGRESS]: '進行中',
-  [TabName.DONE]: '完了',
-};
+import { useTranslation } from 'react-i18next';
 
 type TabBottomMenuProps = {
   selectedTabName: string;
@@ -25,6 +20,13 @@ export default function TabBottomMenu({
   onPress,
   todoList,
 }: TabBottomMenuProps) {
+  const { t } = useTranslation();
+
+  const TAB_TEXT = {
+    [TabName.ALL]: t('tabs.all'),
+    [TabName.IN_PROGRESS]: t('tabs.inProgress'),
+    [TabName.DONE]: t('tabs.done'),
+  };
   /**
    * Counts todos by their completion status
    * @example
